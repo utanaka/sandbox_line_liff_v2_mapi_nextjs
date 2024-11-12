@@ -1,11 +1,18 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import type { Liff } from "@line/liff";
-import { useState, useEffect } from "react";
+"use client";
 
-function MyApp({ Component, pageProps }: AppProps) {
+import { GlobalContext } from "@/contexts/GlobalContext";
+import type { Liff } from "@line/liff";
+import { useCallback, useEffect, useState } from "react";
+
+export default function Template({ children }: { children: React.ReactNode }) {
   const [liffObject, setLiffObject] = useState<Liff | null>(null);
   const [liffError, setLiffError] = useState<string | null>(null);
+
+  const liffId = process.env.NEXT_PUBLIC_LIFF_ID;
+
+  if (!liffId) {
+    throw new Error("NEXT_PUBLIC_LIFF_ID is not defined");
+  }
 
   // Execute liff.init() when the app is initialized
   useEffect(() => {
@@ -15,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       .then((liff) => {
         console.log("LIFF init...");
         liff
-          .init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! })
+          .init({ liffId })
           .then(() => {
             console.log("LIFF init succeeded.");
             setLiffObject(liff);
@@ -25,13 +32,11 @@ function MyApp({ Component, pageProps }: AppProps) {
             setLiffError(error.toString());
           });
       });
-  }, []);
+  }, [liffId]);
 
-  // Provide `liff` object and `liffError` object
-  // to page component as property
-  pageProps.liff = liffObject;
-  pageProps.liffError = liffError;
-  return <Component {...pageProps} />;
+  return (
+    <GlobalContext.Provider value={{ liff: liffObject, liffError: liffError }}>
+      <div>{children}</div>
+    </GlobalContext.Provider>
+  );
 }
-
-export default MyApp;
