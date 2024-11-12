@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LIFF App Router Starter
 
-## Getting Started
+LIFF Starter Next.js App Router is a good starter template can help you understand how to integrate LIFF into your own development environment.
 
-First, run the development server:
+You can check the source code and modify it to implement some cool stuff with LIFF API.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Getting Start
+
+Install dependencies
+
+```sh
+$ npm ci
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set your LIFF ID in .env
+```sh
+$ touch .env
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+NEXT_PUBLIC_LIFF_ID=[your LIFF ID]
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You can run local server with:
 
-## Learn More
+```sh
+$ npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Build & Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Deploy the app using 'Deploy to Netlify' button
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/line/line-liff-v2-starter)
 
-## Deploy on Vercel
+1. Click **Deploy to Netlify** above.
+2. On the "Create New App" page in Netlify, fill in the required information.
+3. Click **Deploy app**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Build and deploy the app with Netlify CLI tools
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Install Netlify CLI tool from npm.
+
+```sh
+$ npm install netlify-cli -g
+```
+
+2. Run following command to build project.
+
+```sh
+$ NEXT_PUBLIC_LIFF_ID="your LIFF ID" npm run build
+```
+
+3. Make sure you have signed in your Netlify account.
+
+```sh
+$ netlify login
+```
+
+4. Deploy to Netlify
+
+```sh
+$ netlify deploy
+```
+
+5. Create your site name and choose the source path `dist` to deploy.
+
+6. You can see the stating(draft) site URL, once you confirm it you can deploy it to production stie.
+
+```sh
+$ netlify deploy --prod
+```
+
+## Demo site
+
+You can also check official site before you trying it.
+
+https://liff-starter.netlify.app
