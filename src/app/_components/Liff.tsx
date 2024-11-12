@@ -8,7 +8,6 @@ export const Liff: FC = () => {
 
   return (
     <div>
-      <h2>create-liff-app</h2>
       {liff && <p>LIFF init succeeded.</p>}
       {liffError && (
         <>
@@ -18,11 +17,6 @@ export const Liff: FC = () => {
           </p>
         </>
       )}
-      <a
-        href="https://developers.line.biz/ja/docs/liff/"
-        target="_blank"
-        rel="noreferrer noopener"
-      >LIFF Documentation</a>
     </div>
   );
 }
